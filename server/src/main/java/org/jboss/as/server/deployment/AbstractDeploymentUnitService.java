@@ -22,11 +22,9 @@
 
 package org.jboss.as.server.deployment;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.jboss.as.server.logging.ServerLogger;
 import org.jboss.msc.inject.Injector;
+import org.jboss.msc.service.AbstractService;
 import org.jboss.msc.service.Service;
 import org.jboss.msc.service.ServiceBuilder;
 import org.jboss.msc.service.ServiceController;
@@ -39,6 +37,11 @@ import org.jboss.msc.service.StartException;
 import org.jboss.msc.service.StopContext;
 import org.jboss.msc.value.InjectedValue;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Consumer;
+
 /**
  * Abstract service responsible for managing the life-cycle of a {@link DeploymentUnit}.
  *
@@ -50,7 +53,8 @@ public abstract class AbstractDeploymentUnitService implements Service<Deploymen
     private static final String FIRST_PHASE_NAME = Phase.values()[0].name();
     private final InjectedValue<DeployerChains> deployerChainsInjector = new InjectedValue<DeployerChains>();
 
-    private DeploymentUnit deploymentUnit;
+    private volatile DeploymentUnitPhaseBuilder phaseBuilder = null;
+    private volatile DeploymentUnit deploymentUnit;
     private volatile StabilityMonitor monitor;
 
     protected AbstractDeploymentUnitService() {
@@ -71,12 +75,41 @@ public abstract class AbstractDeploymentUnitService implements Service<Deploymen
             ServerLogger.DEPLOYMENT_LOGGER.startingSubDeployment(deploymentName);
         }
 
-        final ServiceName serviceName = deploymentUnit.getServiceName().append(FIRST_PHASE_NAME);
-        final Phase firstPhase = Phase.values()[0];
-        final DeploymentUnitPhaseService<?> phaseService = DeploymentUnitPhaseService.create(deploymentUnit, firstPhase);
-        final ServiceBuilder<?> phaseServiceBuilder = target.addService(serviceName, phaseService);
-        phaseServiceBuilder.addDependency(Services.JBOSS_DEPLOYMENT_CHAINS, DeployerChains.class, phaseService.getDeployerChainsInjector());
-        phaseServiceBuilder.install();
+        Consumer<StartContext> installer = startContext -> {
+            final ServiceName serviceName = deploymentUnit.getServiceName().append(FIRST_PHASE_NAME);
+            final Phase firstPhase = Phase.values()[0];
+            final DeploymentUnitPhaseService<?> phaseService = DeploymentUnitPhaseService.create(deploymentUnit, firstPhase);
+            final ServiceBuilder<?> phaseServiceBuilder = startContext.getChildTarget().addService(serviceName, phaseService);
+            phaseServiceBuilder.addDependency(Services.JBOSS_DEPLOYMENT_CHAINS, DeployerChains.class, phaseService.getDeployerChainsInjector());
+            phaseServiceBuilder.install();
+        };
+
+        // If a builder was previously attached, reattach to the new deployment unit instance and build the initial phase using that builder
+        if (this.phaseBuilder != null) {
+            this.deploymentUnit.putAttachment(Attachments.DEPLOYMENT_UNIT_PHASE_BUILDER, this.phaseBuilder);
+            Collection<AttachmentKey<?>> initialAttachmentKeys = this.getDeploymentUnitAttachmentKeys();
+            Consumer<StopContext> uninstaller = stopContext -> {
+                // Cleanup any deployment unit attachments that were not properly removed during DUP undeploy
+                this.getDeploymentUnitAttachmentKeys().stream()
+                        .filter(key -> !initialAttachmentKeys.contains(key))
+                        .forEach(key -> this.deploymentUnit.removeAttachment(key));
+            };
+
+            ServiceName serviceName = this.deploymentUnit.getServiceName().append("installer");
+            this.phaseBuilder.build(target, serviceName, new AbstractService<Object>() {
+                @Override
+                public void start(StartContext context) throws StartException {
+                    installer.accept(context);
+                }
+
+                @Override
+                public void stop(StopContext context) {
+                    uninstaller.accept(context);
+                }
+            }).install();
+        } else {
+            installer.accept(context);
+        }
     }
 
     /**
@@ -96,9 +129,21 @@ public abstract class AbstractDeploymentUnitService implements Service<Deploymen
         } else {
             ServerLogger.DEPLOYMENT_LOGGER.stoppedSubDeployment(deploymentName, (int) (context.getElapsedTime() / 1000000L));
         }
+        // Retain any attached builder across restarts
+        phaseBuilder = deploymentUnit.getAttachment(Attachments.DEPLOYMENT_UNIT_PHASE_BUILDER);
+        // clear up all attachments
+        getDeploymentUnitAttachmentKeys().forEach(key -> deploymentUnit.removeAttachment(key));
         deploymentUnit = null;
         monitor.removeController(context.getController());
         monitor = null;
+    }
+
+    /**
+     * Returns a new set containing the keys of all current deployment unit attachments.
+     *
+     */
+    private Collection<AttachmentKey<?>> getDeploymentUnitAttachmentKeys() {
+        return ((SimpleAttachable) this.deploymentUnit).attachmentKeys();
     }
 
     public synchronized DeploymentUnit getValue() throws IllegalStateException, IllegalArgumentException {

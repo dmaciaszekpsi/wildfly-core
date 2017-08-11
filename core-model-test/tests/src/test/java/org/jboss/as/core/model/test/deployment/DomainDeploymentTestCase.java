@@ -21,28 +21,6 @@
 */
 package org.jboss.as.core.model.test.deployment;
 
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.ARCHIVE;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.BYTES;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.CONTENT;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.DEPLOYMENT;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.ENABLED;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.HASH;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.INPUT_STREAM_INDEX;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.NAME;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.PATH;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.PERSISTENT;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.RELATIVE_TO;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.RUNTIME_NAME;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.SUBDEPLOYMENT;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.URL;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.VALUE;
-import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.WRITE_ATTRIBUTE_OPERATION;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import org.jboss.as.controller.PathAddress;
 import org.jboss.as.controller.PathElement;
 import org.jboss.as.controller.operations.common.Util;
@@ -64,6 +42,13 @@ import org.jboss.dmr.ModelType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.xnio.IoUtils;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static org.jboss.as.controller.descriptions.ModelDescriptionConstants.*;
 
 /**
  *
@@ -234,7 +219,7 @@ public class DomainDeploymentTestCase extends AbstractCoreModelTest {
         KernelServices kernelServices = createKernelServices();
 
         File file = writeToFile("test-file1", 1, 2, 3, 4, 5);
-        File dir = file.getParentFile();
+        File dir = file.getAbsoluteFile().getParentFile();
         ModelNode content = new ModelNode();
         content.get(PATH).set(file.getName());
         content.get(RELATIVE_TO).set(dir.getAbsolutePath());
@@ -451,7 +436,7 @@ public class DomainDeploymentTestCase extends AbstractCoreModelTest {
         op = op.clone();
         op.get(CONTENT).clear();
         contentNode = new ModelNode();
-        contentNode.get(RELATIVE_TO).set(file1.getParentFile().getAbsolutePath());
+        contentNode.get(RELATIVE_TO).set(file1.getAbsoluteFile().getParentFile().getAbsolutePath());
         contentNode.get(ARCHIVE).set(true);
         op.get(CONTENT).add(contentNode);
         kernelServices.executeForFailure(op);
@@ -479,7 +464,7 @@ public class DomainDeploymentTestCase extends AbstractCoreModelTest {
             Assert.assertEquals(file.getAbsolutePath(), deployedContent.get(PATH).asString());
         } else {
             Assert.assertEquals(file.getName(), deployedContent.get(PATH).asString());
-            Assert.assertEquals(file.getParentFile().getAbsolutePath(), deployedContent.get(RELATIVE_TO).asString());
+            Assert.assertEquals(file.getAbsoluteFile().getParentFile().getAbsolutePath(), deployedContent.get(RELATIVE_TO).asString());
         }
         Assert.assertEquals(archive, deployedContent.get(ARCHIVE).asBoolean());
     }
@@ -559,7 +544,7 @@ public class DomainDeploymentTestCase extends AbstractCoreModelTest {
     }
 
     private File writeToFile(String name, int...bytes) throws IOException {
-        File file = new File("target/test-file");
+        File file = new File(name);
         file.delete();
         FileOutputStream fout = new FileOutputStream(file);
         try {
