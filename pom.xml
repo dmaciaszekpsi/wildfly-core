@@ -52,6 +52,17 @@
         <url>${wildfly.core.scm.url}</url>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>community-deploy</id>
+            <url>http://infra-bln-3-nexus2.psi.de:8081/nexus/content/repositories/COMREL/</url>
+        </repository>
+        <snapshotRepository>
+            <id>community-deploy</id>
+            <url>http://infra-bln-3-nexus2.psi.de:8081/nexus/content/repositories/COMSNAP/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <!-- Release Info -->
         <wildfly.core.release.version>${project.version}</wildfly.core.release.version>
