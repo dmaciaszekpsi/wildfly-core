@@ -1571,5 +1571,26 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>deploy-to-ppl-nexus</id>
+            <activation>
+                <property>
+                    <name>deployToPplNexus</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>ppl-release</id>
+                    <name>PPL Release</name>
+                    <url>http://ppl-poz-svmvn3.psi.de:8081/nexus/content/repositories/ppl-release</url>
+                </repository>
+                <snapshotRepository>
+                    <id>ppl-snapshots</id>
+                    <name>PPL Snapshots</name>
+                    <url>http://ppl-poz-svmvn3.psi.de:8081/nexus/content/repositories/ppl-snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
     </profiles>
 </project>
