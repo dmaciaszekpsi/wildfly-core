@@ -29,5 +29,8 @@
                 <param name="path" value="application-roles.properties"/>
             </feature>
         </feature>
+        <feature spec="core-service.management.security-realm">
+            <param name="security-realm" value="WCC_SSL_Realm"/>
+        </feature>
     </feature>
 </feature-group-spec>

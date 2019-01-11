@@ -67,7 +67,6 @@
     <generate-feature-specs>
         <extensions>
             <standalone>
-                <extension>org.jboss.as.deployment-scanner</extension>
                 <extension>org.jboss.as.jmx</extension>
                 <extension>org.jboss.as.logging</extension>
                 <extension>org.jboss.as.remoting</extension>

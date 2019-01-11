@@ -25,5 +25,12 @@
                 <param name="key-password" value="password"/>
             </feature>
         </include>
+        <include feature-id="core-service.management.security-realm:core-service=management,security-realm=WCC_SSL_Realm">
+            <feature spec="core-service.management.security-realm.server-identity.ssl">
+                <param name="keystore-relative-to" value="jboss.server.config.dir" />
+                <param name="keystore-path" value="wcc.keystore"/>
+                <param name="keystore-password" value="wildfly"/>
+            </feature>
+        </include>
     </feature-group>
 </feature-group-spec>
