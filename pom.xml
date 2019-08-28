@@ -31,7 +31,7 @@
 
     <groupId>org.wildfly.core</groupId>
     <artifactId>wildfly-core-parent</artifactId>
-    <version>2.2.0-8-PSI-SNAPSHOT</version>
+    <version>2.2.0-8-PSI-ALPHA-1</version>
 
     <name>WildFly: Core Parent Aggregator</name>
     <description>WildFly: Core Parent Aggregator</description>
@@ -92,7 +92,7 @@
 
         <version.commons-io>2.4</version.commons-io>
         <version.commons-lang>2.6</version.commons-lang>
-        <version.io.undertow>1.4.27-1-PSI</version.io.undertow>
+        <version.io.undertow>1.4.27-1-PSI-ALPHA-1</version.io.undertow>
         <version.javax.inject.javax.inject>1</version.javax.inject.javax.inject>
         <version.junit>4.12</version.junit>
         <version.log4j>1.2.17</version.log4j>
