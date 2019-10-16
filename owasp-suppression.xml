@@ -26,4 +26,13 @@
         <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-core@.*$</packageUrl>
         <cve>CVE-2019-3888</cve>
     </suppress>
+
+    <!-- Fixed in 1.4.27-2-PSI-SNAPSHOT (https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2019-10184, commit: https://github.com/PSI-Polska/undertow/commit/3448a4e0c7fe3c843db6bc7ebc7538c2be72a563 based on https://github.com/undertow-io/undertow/pull/794/commits/d2715e3afa13f50deaa19643676816ce391551e9) -->
+    <suppress>
+        <notes><![CDATA[
+   file name: undertow-core-1.4.27-2-PSI-SNAPSHOT.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-core@.*$</packageUrl>
+        <cve>CVE-2019-10184</cve>
+    </suppress>
 </suppressions>
