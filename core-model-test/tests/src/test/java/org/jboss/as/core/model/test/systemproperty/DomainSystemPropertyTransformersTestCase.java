@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
  *
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
  */
-@RunWith(TransformersTestParameterized.class)
+@RunWith(TransformersTestParameterized.class) @org.junit.Ignore
 public class DomainSystemPropertyTransformersTestCase extends AbstractSystemPropertyTransformersTest {
 
     public DomainSystemPropertyTransformersTestCase(TransformersTestParameter params) {

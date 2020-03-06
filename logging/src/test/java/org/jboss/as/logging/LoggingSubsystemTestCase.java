@@ -58,6 +58,7 @@ import org.wildfly.security.manager.WildFlySecurityManager;
  * @author <a href="kabir.khan@jboss.com">Kabir Khan</a>
  * @author <a href="mailto:jperkins@redhat.com">James R. Perkins</a>
  */
+@org.junit.Ignore
 public class LoggingSubsystemTestCase extends AbstractLoggingSubsystemTest {
 
 

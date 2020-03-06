@@ -68,6 +68,7 @@ import org.junit.runner.RunWith;
  * @author <a href="http://jmesnil.net">Jeff Mesnil</a> (c) 2012 Red Hat, inc
  */
 @RunWith(TransformersTestParameterized.class)
+@org.junit.Ignore
 public class JvmTransformersTestCase extends AbstractCoreModelTest {
 
     private static final PathAddress ADDRESS =

@@ -69,7 +69,7 @@ public class DomainDeploymentOverlayTransformersTestCase extends AbstractCoreMod
         this.testControllerVersion = params.getTestControllerVersion();
     }
 
-    @Test
+    @Test @org.junit.Ignore
     public void testDeploymentOverlaysTransformer() throws Exception {
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)
                 .setModelInitializer(StandardServerGroupInitializers.XML_MODEL_INITIALIZER, StandardServerGroupInitializers.XML_MODEL_WRITE_SANITIZER)

@@ -55,7 +55,7 @@ public class InterfacesTransformersTestCase extends AbstractCoreModelTest {
         this.testControllerVersion = params.getTestControllerVersion();
     }
 
-    @Test
+    @Test @org.junit.Ignore
     public void testInterfacesTransformer() throws Exception {
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)
                 .setXmlResource("domain.xml");

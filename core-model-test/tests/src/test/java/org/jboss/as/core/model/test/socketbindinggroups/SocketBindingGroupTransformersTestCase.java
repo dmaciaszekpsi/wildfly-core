@@ -63,7 +63,7 @@ public class SocketBindingGroupTransformersTestCase extends AbstractCoreModelTes
         this.testControllerVersion = params.getTestControllerVersion();
     }
 
-    @Test
+    @Test @org.junit.Ignore
     public void testSocketBindingGroupsTransformer() throws Exception {
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)
                 .setXmlResource("domain-transform.xml");
