@@ -77,7 +77,7 @@ public class DomainServerGroupTransformersTestCase extends AbstractCoreModelTest
         this.testControllerVersion = params.getTestControllerVersion();
     }
 
-    @Test @org.junit.Ignore
+    @Test
     public void testServerGroupsTransformer() throws Exception {
 
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)

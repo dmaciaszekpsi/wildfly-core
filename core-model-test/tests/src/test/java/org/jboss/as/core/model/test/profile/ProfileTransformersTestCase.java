@@ -63,7 +63,7 @@ public class ProfileTransformersTestCase extends AbstractCoreModelTest {
         this.testControllerVersion = params.getTestControllerVersion();
     }
 
-    @Test @org.junit.Ignore
+    @Test
     public void testProfilesTransformer() throws Exception {
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)
                 .setXmlResource("domain-transform.xml");

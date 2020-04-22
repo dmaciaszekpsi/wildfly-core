@@ -65,7 +65,7 @@ public class PathsTransformersTestCase extends AbstractCoreModelTest {
         return TransformersTestParameter.setupVersions();
     }
 
-    @Test @org.junit.Ignore
+    @Test
     public void testPathsTransformer() throws Exception {
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)
                 .setXmlResource("domain.xml");

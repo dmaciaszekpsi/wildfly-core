@@ -63,7 +63,7 @@ public class AccessAuthorizationTransformationTestCase extends AbstractCoreModel
         this.testControllerVersion = params.getTestControllerVersion();
     }
 
-    @Test @org.junit.Ignore
+    @Test
     public void testAllowNonRBAC() throws Exception {
 
         KernelServicesBuilder builder = createKernelServicesBuilder(TestModelType.DOMAIN)
