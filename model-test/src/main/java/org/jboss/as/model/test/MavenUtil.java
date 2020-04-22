@@ -242,7 +242,7 @@ class MavenUtil {
         List<RemoteRepository> remoteRepositories = new ArrayList<RemoteRepository>();
         if (remoteReposFromSysProp == null || remoteReposFromSysProp.trim().length() == 0 || remoteReposFromSysProp.startsWith("${")) {
             if (useEapRepository) {
-                RemoteRepository.Builder repository = new RemoteRepository.Builder("product-repository", "default", "https://maven.repository.redhat.com/nexus/content/groups/product-techpreview/");
+                RemoteRepository.Builder repository = new RemoteRepository.Builder("product-repository", "default", "https://maven.repository.redhat.com/ga/");
                 if (httpsProxy != null) {
                     repository.setProxy(httpsProxy);
                 }
