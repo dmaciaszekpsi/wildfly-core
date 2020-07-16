@@ -18,6 +18,7 @@
 	   <cve>CVE-2019-14888</cve>
       <cve>CVE-2020-10705</cve>
       <cve>CVE-2020-10719</cve>
+      <cve>CVE-2020-1745</cve>
     </suppress>
 
     <!-- [wildfly-core] Not applicable, this is EAP vulnerability regarding system image, not Wildfly server itself (more: http://jira-bld-com.psi.de:8080/browse/COM_WILDFLY-152)  -->
