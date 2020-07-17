@@ -35,4 +35,11 @@
         <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-core@.*$</packageUrl>
         <cve>CVE-2019-10184</cve>
     </suppress>
+
+    <!-- There is no fix for this issue in WF10 - there are workarounds; please check http://jira-bld-com.psi.de:8080/browse/COM_WILDFLY-285 -->
+    <suppress>
+        <notes><![CDATA[file name: undertow-core-1.4.27-2-PSI.jar]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-core@.*$</packageUrl>
+        <cve>CVE-2020-1745</cve>
+    </suppress>
 </suppressions>
