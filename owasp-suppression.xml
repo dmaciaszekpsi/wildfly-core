@@ -49,4 +49,11 @@
         <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-core@.*$</packageUrl>
         <cve>CVE-2019-10212</cve>
     </suppress>	
+
+    <!-- Fixed in 1.4.27-3-PSI-SNAPSHOT (https://bugzilla.redhat.com/show_bug.cgi?id=1803241, COM_WILDFLY-288), commits: e0c1165, c5769b8, 97da309, 0c593a1 -->
+    <suppress>
+        <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-.*@.*$</packageUrl>
+        <cve>CVE-2020-10705</cve>
+    </suppress>	
+
 </suppressions>
