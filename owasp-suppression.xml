@@ -56,4 +56,10 @@
         <cve>CVE-2020-10705</cve>
     </suppress>	
 
+    <!-- Fixed in 1.4.27-3-PSI-SNAPSHOT (https://bugzilla.redhat.com/show_bug.cgi?id=1772464, COM_WILDFLY-281), commits: 39a4c19, 9e09dad -->
+    <suppress>
+        <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-.*@.*$</packageUrl>
+        <cve>CVE-2019-14888</cve>
+    </suppress>	
+
 </suppressions>
