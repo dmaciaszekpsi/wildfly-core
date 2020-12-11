@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!-- WontFix: http://jira-bld-com.psi.de:8080/browse/COM_WILDFLY-295 -->
+    <suppress>
+        <notes><![CDATA[
+        file name: undertow-core-1.4.27-3-PSI.jar
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.undertow/undertow\-.*$</packageUrl>
+        <cve>CVE-2020-1757</cve>
+     </suppress>
+
     <!-- Fixed in 2.7.1.jbossorg-4 (https://github.com/jboss/xalan-j/commit/8cd0c151456475f57961b0987d9f985202f81eec) -->
     <suppress>
         <notes><![CDATA[
