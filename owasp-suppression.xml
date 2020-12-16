@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
 
+   <!-- [wildfly] WildFly 15.0.1-9-PSI ships with org.jboss.genericjms 2.0.8.Final, which has a fix for this vulerability see: https://issues.redhat.com/browse/WFLY-13880, https://github.com/wildfly/wildfly/commit/0e1a83e45553e4e57dbff11261feb11c12ebd63e -->
+   <suppress>
+      <notes><![CDATA[
+      file name: wildfly-galleon-plugins-4.0.4.Final.jar
+      ]]></notes>
+      <packageUrl regex="true">^pkg:maven/org\.wildfly.*@.*$</packageUrl>
+      <cve>CVE-2020-25640</cve>
+   </suppress>
+
     <!-- [wildfly-core] The vulnerability applies to io.undertow package, undertow-server from org.wildfly.security.elytron-web package is a different module -->
     <suppress>
        <notes><![CDATA[
