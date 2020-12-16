@@ -252,9 +252,9 @@ public class EmbeddedHostControllerFactory {
 
         @Override
         public void start() throws EmbeddedProcessStartException {
-            ClassLoader tccl = EmbeddedManagedProcess.getTccl();
+            ClassLoader tccl = SecurityActions.getTccl();
             try {
-                EmbeddedManagedProcess.setTccl(embeddedModuleCL);
+                SecurityActions.setTccl(embeddedModuleCL);
                 EmbeddedHostControllerBootstrap hostControllerBootstrap = null;
                 try {
                     final long startTime = System.currentTimeMillis();
@@ -293,7 +293,7 @@ public class EmbeddedHostControllerFactory {
                     throw EmbeddedLogger.ROOT_LOGGER.cannotStartEmbeddedServer(ex);
                 }
             } finally {
-                EmbeddedManagedProcess.setTccl(tccl);
+                SecurityActions.setTccl(tccl);
             }
         }
 
@@ -359,12 +359,12 @@ public class EmbeddedHostControllerFactory {
 
         @Override
         public void stop() {
-            ClassLoader tccl = EmbeddedManagedProcess.getTccl();
+            ClassLoader tccl = SecurityActions.getTccl();
             try {
-                EmbeddedManagedProcess.setTccl(embeddedModuleCL);
+                SecurityActions.setTccl(embeddedModuleCL);
                 exit();
             } finally {
-                EmbeddedManagedProcess.setTccl(tccl);
+                SecurityActions.setTccl(tccl);
             }
         }
 
