@@ -25,7 +25,7 @@
     <parent>
           <groupId>org.wildfly.core</groupId>
           <artifactId>wildfly-core-testsuite</artifactId>
-          <version>7.0.0-7-PSI</version>
+          <version>7.0.0-8-PSI-SNAPSHOT</version>
           <relativePath>../pom.xml</relativePath>
      </parent>
 
