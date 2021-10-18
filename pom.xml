@@ -237,6 +237,8 @@
         <version.org.wildfly.security.elytron>1.17.1.Final</version.org.wildfly.security.elytron>
         <version.org.wildfly.security.elytron-web>1.9.1.Final</version.org.wildfly.security.elytron-web>
 
+        <!-- Allow insecure repositories -->
+        <insecure.repositories>WARN</insecure.repositories>
     </properties>
 
     <modules>
