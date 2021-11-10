@@ -37,4 +37,38 @@
         <cve>CVE-2020-10719</cve>
     </suppress>
 
+    <!-- [wildfly-core] Applies to versions prior to wildfly 21.0.0 -->
+    <suppress>
+        <notes><![CDATA[
+   file name: wildfly-openssl-macosx-x86_64-2.1.0.SP01.jar
+   file name: wildfly-openssl-linux-s390x-2.1.0.Final.jar
+   file name: wildfly-openssl-linux-i386-2.1.0.SP01.jar
+   file name: wildfly-openssl-java-2.1.4.Final.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.wildfly\.openssl/wildfly\-openssl\-.*$</packageUrl>
+        <cve>CVE-2020-10718</cve>
+        <cve>CVE-2020-10740</cve>
+    </suppress>
+
+    <!-- [wildfly-core] Applies to versions prior to wildfly 21.0.0 -->
+    <suppress>
+        <notes><![CDATA[
+   file name: wildfly-legacy-versions-6.0.1.Final.jar
+   file name: wildfly-legacy-spi-6.0.1.Final.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.wildfly\.legacy\.test/wildfly\-legacy\-.*$</packageUrl>
+        <cve>CVE-2020-10718</cve>
+        <cve>CVE-2020-10740</cve>
+    </suppress>
+
+    <!-- [wildfly-core] Applies to versions prior to wildfly 21.0.0 -->
+    <suppress>
+        <notes><![CDATA[
+   file name: wildfly-galleon-plugins-5.2.2.Final.jar
+   ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.wildfly\.galleon\-plugins/wildfly\-galleon\-plugins@.*$</packageUrl>
+        <cve>CVE-2020-10718</cve>
+        <cve>CVE-2020-10740</cve>
+    </suppress>
+
 </suppressions>
