@@ -34,8 +34,8 @@
        <cve>CVE-2018-1067</cve>
        <cve>CVE-2019-3888</cve>
        <cve>CVE-2019-10184</cve>
-	   <cve>CVE-2019-10212</cve>
-	   <cve>CVE-2019-14888</cve>
+       <cve>CVE-2019-10212</cve>
+       <cve>CVE-2019-14888</cve>
        <cve>CVE-2019-19343</cve>
        <cve>CVE-2020-1745</cve>
        <cve>CVE-2020-1757</cve>
@@ -43,31 +43,56 @@
        <cve>CVE-2020-10719</cve>
     </suppress>
 
-    <!-- [wildfly-core] Not applicable, this is EAP vulnerability regarding system image, not Wildfly server itself (more: http://jira-bld-com.psi.de:8080/browse/COM_WILDFLY-152)  -->
-    <suppress>
-       <notes><![CDATA[
+   <!-- [wildfly-core] Not applicable, this is EAP vulnerability regarding system image, not Wildfly server itself (more: http://jira-bld-com.psi.de:8080/browse/COM_WILDFLY-152)  -->
+   <suppress>
+      <notes><![CDATA[
        file name: wildfly-elytron-1.7.0.Final.jar
        ]]></notes>
-       <packageUrl regex="true">^pkg:maven/org\.wildfly.*@.*$</packageUrl>
-       <cve>CVE-2019-3805</cve>
-    </suppress>    
-    
-    <!-- [wildfly-core] reported for wildfly version before 14.0.0 (our is 15.x)  -->
-    <suppress>
-       <notes><![CDATA[
-       file name: wildfly-elytron-1.7.0.Final.jar
-       ]]></notes>
-       <packageUrl regex="true">^pkg:maven/org\.wildfly.*@.*$</packageUrl>
-       <cve>CVE-2018-14627</cve>
-    </suppress>    
+      <packageUrl regex="true">^pkg:maven/org\.wildfly.*@.*$</packageUrl>
+      <cve>CVE-2019-3805</cve>
+   </suppress>
 
-    <!-- [wildfly-core] Vulnerabiliti applies to WildFly Core before version 6.0.0.Alpha3, our version is forked from 7.0.0  -->
-    <suppress>
-       <notes><![CDATA[
+   <!-- [wildfly-core] reported for wildfly version before 14.0.0 (our is 15.x)  -->
+   <suppress>
+      <notes><![CDATA[
+       file name: wildfly-elytron-1.7.0.Final.jar
+       ]]></notes>
+      <packageUrl regex="true">^pkg:maven/org\.wildfly.*@.*$</packageUrl>
+      <cve>CVE-2018-14627</cve>
+   </suppress>
+
+   <!-- [wildfly-core] Vulnerabiliti applies to WildFly Core before version 6.0.0.Alpha3, our version is forked from 7.0.0  -->
+   <suppress>
+      <notes><![CDATA[
        file name: wildfly-plugin-core-1.2.0.Final.jar
        ]]></notes>
-       <packageUrl regex="true">^pkg:maven/org\.wildfly\.plugins/wildfly\-plugin\-core@.*$</packageUrl>
-       <cve>CVE-2018-10862</cve>
-    </suppress>
-    
+      <packageUrl regex="true">^pkg:maven/org\.wildfly\.plugins/wildfly\-plugin\-core@.*$</packageUrl>
+      <cve>CVE-2018-10862</cve>
+   </suppress>
+   <!-- ManagedSieve of Apache James not found in WildFly distribution -->
+   <!-- Jazzer of Apache James not found in WildFly distribution  -->
+   <suppress>
+      <notes><![CDATA[
+   file name: commons-lang-2.6.jar
+   ]]></notes>
+      <packageUrl regex="true">^pkg:maven/commons\-lang/commons\-lang@.*$</packageUrl>
+      <cve>CVE-2021-40525</cve>
+      <cve>CVE-2021-40110</cve>
+   </suppress>
+   <suppress>
+      <notes><![CDATA[
+   file name: commons-lang3-3.5.jar
+   ]]></notes>
+      <packageUrl regex="true">^pkg:maven/org\.apache\.commons/commons\-lang3@.*$</packageUrl>
+      <cve>CVE-2021-40525</cve>
+      <cve>CVE-2021-40110</cve>
+   </suppress>
+   <suppress>
+      <notes><![CDATA[
+   file name: wildfly-elytron-tool-1.5.0.Final.jar
+   ]]></notes>
+      <packageUrl regex="true">^pkg:maven/commons\-cli/commons\-cli@.*$</packageUrl>
+      <cve>CVE-2021-40525</cve>
+      <cve>CVE-2021-40110</cve>
+   </suppress>
 </suppressions>
