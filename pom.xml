@@ -667,6 +667,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.jboss.xnio</groupId>
+                <artifactId>xnio-api</artifactId>
+                <version>3.8.7.Final</version>
+            </dependency>
+            <dependency>
                 <groupId>ch.qos.cal10n</groupId>
                 <artifactId>cal10n-api</artifactId>
                 <version>${version.ch.qos.cal10n}</version>
