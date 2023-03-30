@@ -606,6 +606,14 @@ public class YamlConfigurationExtension implements ConfigurationExtension {
         }
 
         @Override
+        protected Class<?> getClassForNode(Node node) {
+            Class<? extends Object> classForTag = typeTags.get(node.getTag());
+            if (classForTag == null) {
+                throw new YAMLException("Class not found: " + node.getTag().getClassName());
+            }
+            return classForTag;
+        }
+        @Override
         protected void flattenMapping(MappingNode node) {
             // perform merging only on nodes containing merge node(s)
             processDuplicateKeys(node);
