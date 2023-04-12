@@ -199,7 +199,8 @@ public class RespawnTestCase {
     @Test
     public void testDomainRespawn() throws Exception {
 
-        System.out.println("testDomainRespawn()");
+        //System.out.println("testDomainRespawn()");
+        log.info("testDomainRespawn()");
 
         //Make sure everything started
         List<RunningProcess> processes = waitForAllProcessesFullyStarted();
@@ -220,7 +221,8 @@ public class RespawnTestCase {
     @Test
     public void testReloadHc() throws Exception {
 
-        System.out.println("testReloadHc()");
+        //System.out.println("testReloadHc()");
+        log.info("testReloadHc()");
 
         List<RunningProcess> original = waitForAllProcessesFullyStarted();
         Set<String> serverIds = new HashSet<String>();
@@ -248,7 +250,8 @@ public class RespawnTestCase {
     @Test
     public void testReloadHcButNotServers() throws Exception {
 
-        System.out.println("testReloadHcButNotServers()");
+        //System.out.println("testReloadHcButNotServers()");
+        log.info("testReloadHcButNotServers()");
 
         List<RunningProcess> original = waitForAllProcessesFullyStarted();
 
@@ -292,7 +295,8 @@ public class RespawnTestCase {
     @Test
     public void testReloadHcButNotServersWithFailedServer() throws Exception {
 
-        System.out.println("testReloadHcButNotServersWithFailedServer()");
+        //System.out.println("testReloadHcButNotServersWithFailedServer()");
+        log.info("testReloadHcButNotServersWithFailedServer()");
 
         List<RunningProcess> original = waitForAllProcessesFullyStarted();
 
@@ -324,6 +328,8 @@ public class RespawnTestCase {
     @Test
     public void testStartKilledServer() throws Exception {
 
+        log.info("testStartKilledServer()");
+
         List<RunningProcess> original = waitForAllProcessesFullyStarted();
         RunningProcess serverOne = processUtil.getProcess(original, SERVER_ONE);
         Assert.assertNotNull(serverOne);
@@ -341,7 +347,8 @@ public class RespawnTestCase {
     @Test
     public void testHCReloadAbortPreservesServers() throws Exception {
 
-        System.out.println("testHCReloadAbortPreservesServers()");
+        //System.out.println("testHCReloadAbortPreservesServers()");
+        log.info("testHCReloadAbortPreservesServers()");
 
         List<RunningProcess> original = waitForAllProcessesFullyStarted();
 
@@ -746,7 +753,7 @@ public class RespawnTestCase {
 
         @Override
         String[] getKillCommand(RunningProcess process) {
-            return new String[] {"bash", "-l", "-c", "kill -9 " + process.getProcessId()};
+            return new String[] {"jstack " + process.getProcessId() + " && kill -9 " + process.getProcessId()};
         }
     }
 
